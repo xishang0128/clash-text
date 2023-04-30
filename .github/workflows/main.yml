@@ -19,7 +19,7 @@ jobs:
         run: |
           mkdir -p ./publish/
           curl -sSL https://github.com/blackmatrix7/ios_rule_script/raw/master/rule/Clash/Google/Google.yaml | ${{ env.SED }} > ./publish/google.txt
-          curl -sSL https://github.com/blackmatrix7/ios_rule_script/raw/master/rule/China/Google/China_Classical.yaml | ${{ env.SED }} > ./publish/cn.txt
+          curl -sSL https://github.com/blackmatrix7/ios_rule_script/raw/master/rule/Clash/China/China_Classical.yaml | ${{ env.SED }} > ./publish/cn.txt
 
       - name: Delete current release assets
         uses: andreaswilli/delete-release-assets-action@v2.0.0
