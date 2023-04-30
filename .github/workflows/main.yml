@@ -12,14 +12,21 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: sed clash rule
+      - name: sed clash classical rule
         env:
           NO_SKIP: true
           SED: grep DOMAIN | grep -v "#" | grep -v DOMAIN-KEYWORD | sed 's/  - DOMAIN,//g' | sed 's/  - DOMAIN-SUFFIX,/+./g'
         run: |
           mkdir -p ./publish/
           curl -sSL https://github.com/blackmatrix7/ios_rule_script/raw/master/rule/Clash/Google/Google.yaml | ${{ env.SED }} > ./publish/google.txt
-          curl -sSL https://github.com/blackmatrix7/ios_rule_script/raw/master/rule/Clash/China/China_Classical.yaml | ${{ env.SED }} > ./publish/cn.txt
+          curl -sSL https://github.com/blackmatrix7/ios_rule_script/raw/master/rule/Clash/ChinaMax/ChinaMax_Classical.yaml | ${{ env.SED }} > ./publish/cn.txt
+
+      - name: sed surge domain text rule
+        env:
+          NO_SKIP: true
+          SED: sed 's/\./+./g'
+        run: |
+          curl -sSL https://anti-ad.net/surge2.txt | ${{ env.SED }} > ./publish/ad.txt
 
       - name: Delete current release assets
         uses: andreaswilli/delete-release-assets-action@v2.0.0
